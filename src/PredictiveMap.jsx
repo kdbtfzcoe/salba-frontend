@@ -3,6 +3,8 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents, Polyline, Tooltip
 import { Link } from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import Navbar from './Navbar';
+
 
 // Custom Icons
 const greenIcon = new L.Icon({
@@ -68,28 +70,8 @@ const PredictiveMap = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans flex flex-col">
-      {/* 1. NAVBAR */}
-      <nav className="bg-white border-b border-gray-100 sticky top-0 z-[5000]">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-teal-800 rounded-xl flex items-center justify-center text-white shadow-lg">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <div>
-              <span className="text-xl font-black tracking-tighter text-slate-900 block leading-none uppercase">PROJECT SALBA</span>
-              <span className="text-[10px] font-bold text-teal-600 uppercase tracking-widest">Flood Prediction</span>
-            </div>
-          </div>
-          <div className="hidden md:flex items-center gap-10">
-            <Link to="/" className="text-sm font-black text-slate-600 hover:text-teal-700 uppercase tracking-wider">Home</Link>
-            <Link to="/monitoring" className="text-sm font-black text-slate-600 hover:text-teal-700 uppercase tracking-wider">Monitoring</Link>
-            <Link to="/map" className="text-sm font-black text-teal-700 uppercase tracking-wider underline underline-offset-8 decoration-2">Predictive Map</Link>
-            <Link to="/register" className="bg-slate-900 text-white px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest">Get Started</Link>
-          </div>
-        </div>
-      </nav>
+    
+      <Navbar />
 
       {/* 2. HERO SECTION */}
       <div className="bg-teal-800 py-8 px-6 text-center text-white">

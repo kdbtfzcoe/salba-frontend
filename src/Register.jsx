@@ -4,6 +4,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import heroImage from './assets/hero-bg.webp'; 
 
 // Custom Pin Icon
 const customMarker = new L.divIcon({
