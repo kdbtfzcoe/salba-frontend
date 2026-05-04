@@ -18,8 +18,8 @@ const redIcon = new L.Icon({
 });
 
 const PredictiveMap = () => {
-  const center = [14.3487, 121.0848]; 
-  const prototypePos = [14.348548, 121.074335]; 
+  const center = [14.3487, 121.0848];
+  const prototypePos = [14.348548, 121.074335];
   const [userPos, setUserPos] = useState([14.3480, 121.0840]);
   const [elevations, setElevations] = useState({ sensor: 0, user: 0 });
   const [loading, setLoading] = useState(false);
@@ -59,15 +59,30 @@ const PredictiveMap = () => {
     const isInsideDelaPaz = lat >= 14.3350 && lat <= 14.3650 && lng >= 121.0700 && lng <= 121.1000;
 
     const distanceMeters = Math.sqrt(
-      Math.pow(Math.abs(prototypePos[0] - userPos[0]) * 111320, 2) + 
+      Math.pow(Math.abs(prototypePos[0] - userPos[0]) * 111320, 2) +
       Math.pow(Math.abs(prototypePos[1] - userPos[1]) * 111320, 2)
     );
 
-    // Height relative to user (User Elevation - Sensor Elevation)
     const relativeHeight = elevations.user - elevations.sensor;
-    
+
+    // --- Confidence Level Calculation ---
+    // High: Distance < 500m, Moderate: 500m-1200m, Low: > 1200m
+    let confLabel = "Low";
+    let confValue = 45;
+    let confColor = "bg-red-100 text-red-700 border-red-200";
+
+    if (distanceMeters < 500) {
+      confLabel = "High";
+      confValue = 92;
+      confColor = "bg-emerald-100 text-emerald-700 border-emerald-200";
+    } else if (distanceMeters < 1200) {
+      confLabel = "Moderate";
+      confValue = 74;
+      confColor = "bg-blue-100 text-blue-700 border-blue-200";
+    }
+   
     if (!isInsideDelaPaz) {
-      return { distanceMeters: distanceMeters.toFixed(0), arrivalTime: "OUTSIDE", heightDiff: relativeHeight.toFixed(1), isInsideDelaPaz: false };
+      return { distanceMeters: distanceMeters.toFixed(0), arrivalTime: "OUTSIDE", heightDiff: relativeHeight.toFixed(1), isInsideDelaPaz: false, confidence: { label: "N/A", value: 0, style: "bg-gray-100 text-gray-400" } };
     }
 
     let baseSpeed;
@@ -79,22 +94,21 @@ const PredictiveMap = () => {
     let adjustedVelocity;
 
     if (relativeHeight > 0) {
-      // UPHILL: Slows down (climbing)
-      adjustedVelocity = baseSpeed / (1 + (slope * 50)); 
+      adjustedVelocity = baseSpeed / (1 + (slope * 50));
     } else {
-      // DOWNHILL: Speeds up (gravity)
       adjustedVelocity = baseSpeed * (1 + (Math.abs(slope) * 50));
     }
 
     adjustedVelocity = Math.max(0.05, adjustedVelocity * (floodRate / 5));
     let calculatedTime = Math.floor((distanceMeters / adjustedVelocity) / 60);
 
-    return { 
-      distanceMeters: distanceMeters.toFixed(0), 
+    return {
+      distanceMeters: distanceMeters.toFixed(0),
       arrivalTime: Math.max(1, calculatedTime),
       heightDiff: relativeHeight.toFixed(1),
       isInsideDelaPaz: true,
-      isUphill: relativeHeight > 0
+      isUphill: relativeHeight > 0,
+      confidence: { label: confLabel, value: confValue, style: confColor }
     };
   }, [userPos, elevations, floodRate]);
 
@@ -141,7 +155,7 @@ const PredictiveMap = () => {
                 {loading ? "Analyzing..." : "Ready"}
               </div>
             </div>
-            <div className="flex-grow relative bg-slate-200"> 
+            <div className="flex-grow relative bg-slate-200">
               <MapContainer center={center} zoom={16} style={{ height: '100%', width: '100%' }}>
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 <Polyline positions={[prototypePos, userPos]} pathOptions={{ color: '#0f172a', dashArray: '10, 10', weight: 2 }} />
@@ -158,7 +172,13 @@ const PredictiveMap = () => {
           {/* Revised Information Box Sidebar */}
           <div className="lg:w-[25%] flex flex-col gap-4 h-[700px]">
             <div className="bg-white p-4 rounded-2xl shadow-md border border-gray-200 flex flex-col gap-3 h-full overflow-hidden">
-              
+             
+              {/* Confidence Level Box */}
+              <div className={`p-2 rounded-lg border flex justify-between items-center ${stats.confidence.style}`}>
+                <span className="text-[10px] font-black uppercase tracking-wider">Confidence Level</span>
+                <span className="text-[11px] font-black">{stats.confidence.label} ({stats.confidence.value}%)</span>
+              </div>
+
               <div className={`p-4 rounded-xl border ${getArrivalTimeColor()}`}>
                 <p className="text-[10px] font-bold uppercase opacity-80 mb-1">Est. Arrival Time</p>
                 <div className="flex items-baseline gap-1">
