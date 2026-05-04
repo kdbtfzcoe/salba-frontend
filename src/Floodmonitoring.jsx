@@ -75,7 +75,7 @@ const Floodmonitoring = () => {
       <div className="bg-teal-800 py-7 px-6 text-center text-white">
         <h1 className="text-4xl font-black mb-2 tracking-tight">LIVE FLOOD MONITORING</h1>
         <p className="text-teal-100 font-medium max-w-xl mx-auto">
-          Aktwal na antas ng tubig at status ng baha sa Brgy. Dela Paz, Biñan.
+          Real-time water levels and flood status in Brgy. Dela Paz, Biñan.
         </p>
       </div>
 

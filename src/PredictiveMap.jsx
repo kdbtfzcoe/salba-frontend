@@ -140,12 +140,12 @@ const PredictiveMap = () => {
   return (
     <div className="min-h-screen bg-gray-50 font-sans flex flex-col">
       <Navbar />
-      <div className="bg-teal-800 py-7 text-center text-white">
-        <h1 className="text-4xl font-black uppercase tracking-tight">DELA PAZ PREDICTIVE MAP</h1>
-        <p className="text-teal-100 text-xs tracking-widest uppercase">Localized Flood Prediction System</p>
+      <div className="bg-teal-800 py-7 px-6 text-center text-white">
+        <h1 className="text-4xl font-black mb-2 uppercase tracking-tight">LIVE PREDICTIVE MAP</h1>
+        <p className="text-teal-100 font-medium max-w-xl mx-auto">Localized Flood Prediction System</p>
       </div>
 
-      <main className="max-w-7xl mx-auto w-full px-6 py-8 flex-grow">
+      <main className="max-w-7xl mx-auto w-full px-6 py-8 flex-grow -mt-3 relative z-10">
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Map Container */}
           <div className="lg:w-[75%] bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden min-h-[700px] flex flex-col">
@@ -155,8 +155,8 @@ const PredictiveMap = () => {
                 {loading ? "Analyzing..." : "Ready"}
               </div>
             </div>
-            <div className="flex-grow relative bg-slate-200">
-              <MapContainer center={center} zoom={16} style={{ height: '100%', width: '100%' }}>
+            <div className="flex-grow relative bg-slate-200 z-0">
+            <MapContainer center={center} zoom={16} style={{ height: '100%', width: '100%' }}>
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 <Polyline positions={[prototypePos, userPos]} pathOptions={{ color: '#0f172a', dashArray: '10, 10', weight: 2 }} />
                 <Marker position={prototypePos} icon={greenIcon}>
@@ -271,7 +271,7 @@ const PredictiveMap = () => {
       </main>
 
       <footer className="py-8 text-center text-gray-400 text-xs font-bold uppercase tracking-widest border-t border-gray-100">
-        &copy; 2024 Project Salba - Dela Paz Edition
+        &copy; 2026 Project Salba - Biñan, Laguna
       </footer>
     </div>
   );
