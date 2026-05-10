@@ -386,6 +386,7 @@ const PredictiveMap = () => {
           </div>
         </div>
 
+         {/* BOTTOM SECTIONS: Guide and Hotlines */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
           <div className="md:col-span-2 bg-teal-50 p-8 rounded-2xl border border-teal-100 shadow-sm">
             <h3 className="text-lg font-black text-slate-800 mb-6 uppercase tracking-tight">Flood Arrival Guide</h3>
@@ -400,35 +401,39 @@ const PredictiveMap = () => {
                   </tr>
                 </thead>
                 <tbody className="font-bold text-slate-700">
-                  <tr className="border-b border-slate-100"><td className="py-4 text-blue-600">Awareness</td><td className="py-4">24+ Hours</td><td className="py-4">Planning</td><td className="py-4">Proactive</td></tr>
-                  <tr className="border-b border-slate-100"><td className="py-4 text-orange-500">Action</td><td className="py-4">15 - 60 Mins</td><td className="py-4">Mitigation</td><td className="py-4">Urgent</td></tr>
-                  <tr><td className="py-4 text-red-600">Critical</td><td className="py-4">0 - 15 Mins</td><td className="py-4">Survival</td><td className="py-4">Immediate</td></tr>
+                  <tr className="border-b border-slate-100"><td className="py-4 text-blue-600">5: Awareness</td><td className="py-4">24+ Hours</td><td className="py-4">Planning</td><td className="py-4 font-black">Proactive</td></tr>
+                  <tr className="border-b border-slate-100"><td className="py-4 text-emerald-600">4: Precaution</td><td className="py-4">6 - 24 Hours</td><td className="py-4">Protection</td><td className="py-4 font-black text-emerald-700">Labor-Intensive</td></tr>
+                  <tr className="border-b border-slate-100"><td className="py-4 text-yellow-500">3: Warning</td><td className="py-4">1 - 6 Hours</td><td className="py-4">Staging</td><td className="py-4 font-black text-yellow-600">Alert</td></tr>
+                  <tr className="border-b border-slate-100"><td className="py-4 text-orange-500">2: Action</td><td className="py-4">15 - 60 Mins</td><td className="py-4">Mitigation</td><td className="py-4 font-black text-orange-600">Urgent</td></tr>
+                  <tr><td className="py-4 text-red-600">1: Critical</td><td className="py-4">0 - 15 Mins</td><td className="py-4">Survival</td><td className="py-4 font-black text-red-700">Immediate</td></tr>
                 </tbody>
               </table>
             </div>
           </div>
 
+
           <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm flex flex-col">
             <h3 className="text-lg font-black text-slate-800 mb-4 uppercase tracking-tight">Emergency Hotline</h3>
-            <p className="text-gray-500 text-sm mb-6 leading-relaxed">Kung may emergency o nangangailangan ng rescue, tumawag sa mga sumusunod:</p>
             <div className="space-y-3">
-              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-xl">
-                <span className="font-bold text-slate-700">Biñan Rescue</span>
-                <span className="text-teal-700 font-black">911 / (049) 511-9111</span>
+              <div className="flex justify-between items-center p-4 bg-gray-50 rounded-xl border">
+                <span className="font-bold text-slate-700 uppercase text-xs">Biñan Rescue</span>
+                <span className="text-teal-700 font-black tracking-tighter">911 / (049) 511-9111</span>
               </div>
-              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-xl">
-                <span className="font-bold text-slate-700">PNP Biñan</span>
-                <span className="text-teal-700 font-black">(049) 511-6633</span>
+              <div className="flex justify-between items-center p-4 bg-gray-50 rounded-xl border">
+                <span className="font-bold text-slate-700 uppercase text-xs">PNP Biñan</span>
+                <span className="text-teal-700 font-black tracking-tighter">(049) 511-6633</span>
               </div>
             </div>
           </div>
         </div>
       </main>
 
+
       <footer className="py-8 text-center text-gray-400 text-xs font-bold uppercase tracking-widest border-t border-gray-100">
         &copy; 2026 Project Salba - Biñan, Laguna
       </footer>
     </div>
+
   );
 };
 
