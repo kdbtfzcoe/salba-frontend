@@ -1,0 +1,36 @@
+/* Ensure the circles scale smoothly from their vector origin center */
+.radar-pulse-1, .radar-pulse-2, .radar-pulse-3 {
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+/* Staggered intervals to create a continuous flowing wave effect */
+.radar-pulse-1 {
+  animation: radarWave 3s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+}
+
+.radar-pulse-2 {
+  animation: radarWave 3s cubic-bezier(0.1, 0.8, 0.3, 1) infinite 1s;
+}
+
+.radar-pulse-3 {
+  animation: radarWave 3s cubic-bezier(0.1, 0.8, 0.3, 1) infinite 2s;
+}
+
+@keyframes radarWave {
+  0% {
+    transform: scale(0);
+    opacity: 0.9;
+    stroke-width: 4px;
+  }
+  50% {
+    /* Wave reaches mid-distance with stable visibility */
+    opacity: 0.6;
+    stroke-width: 2px;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+    stroke-width: 0.5px;
+  }
+}
